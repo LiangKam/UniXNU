@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+"""Check that ppm_to_png keeps every raster byte and rejects malformed PPM files."""
 import importlib.util
 from pathlib import Path
 import struct
@@ -55,5 +57,5 @@ with tempfile.TemporaryDirectory() as work:
             rejected += 1
         except Exception as error:
             print('invalid case', index + 1, 'wrong error', type(error).__name__)
-    print(f'valid={passed}/7 invalid_rejected={rejected}/7')
-sys.exit(0 if passed == 7 and rejected == 7 else 1)
+    print(f'valid={passed}/{len(valid)} invalid_rejected={rejected}/{len(invalid)}')
+sys.exit(0 if passed == len(valid) and rejected == len(invalid) else 1)
